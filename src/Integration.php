@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace src;
+namespace HawkBundle;
 
-use HawkBundle\Throwable;
+use HawkBundle\Services\ErrorLoggerService;
 use Illuminate\Foundation\Configuration\Exceptions;
-use src\Services\ErrorLoggerService;
 
 class Integration
 {
     public static function handles(Exceptions $exceptions): void
     {
-        $exceptions->reportable(static function (Throwable $exception) {
+        $exceptions->reportable(static function (\Throwable $exception) {
             app(ErrorLoggerService::class)->logException($exception);
         });
     }

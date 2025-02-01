@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace src\Handlers;
+namespace HawkBundle\Handlers;
 
+use HawkBundle\Services\ErrorLoggerService;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use src\Services\ErrorLoggerService;
 
 class ErrorHandler extends ExceptionHandler
 {

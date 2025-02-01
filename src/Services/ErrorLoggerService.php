@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace src\Services;
+namespace HawkBundle\Services;
 
 class ErrorLoggerService
 {
