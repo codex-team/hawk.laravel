@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace src\Facades;
+namespace HawkBundle\Facades;
 
+use HawkBundle\Services\ErrorLoggerService;
 use Illuminate\Support\Facades\Facade;
-use src\Services\ErrorLoggerService;
 
 class ErrorLogger extends Facade
 {

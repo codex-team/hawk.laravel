@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace src;
+namespace HawkBundle;
 
+use HawkBundle\Console\Commands\PublishHawkConfig;
+use HawkBundle\Handlers\ErrorHandler;
+use HawkBundle\Services\ErrorLoggerService;
 use Illuminate\Support\ServiceProvider;
-use src\Console\Commands\PublishHawkConfig;
-use src\Handlers\ErrorHandler;
-use src\Services\ErrorLoggerService;
 
 class ErrorLoggerServiceProvider extends ServiceProvider
 {

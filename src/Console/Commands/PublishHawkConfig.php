@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace src\Console\Commands;
+namespace HawkBundle\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
