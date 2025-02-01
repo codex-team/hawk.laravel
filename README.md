@@ -16,7 +16,7 @@ Laravel errors Catcher for [Hawk.so](https://hawk.so).
 ### Install command
 
 ```bash
-$ composer require codex-team/hawk.laravel
+$ composer require codex-team/hawk.laravel:dev-main
 ```
 
 To enable capturing unhandled exceptions for reporting to `Hawk`, modify your `bootstrap/app.php` file as follows:
