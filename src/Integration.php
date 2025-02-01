@@ -11,7 +11,7 @@ class Integration
 {
     public static function handles(Exceptions $exceptions): void
     {
-        $exceptions->reportable(static function (Throwable $exception) {
+        $exceptions->reportable(static function (\Throwable $exception) {
             app(ErrorLoggerService::class)->logException($exception);
         });
     }
