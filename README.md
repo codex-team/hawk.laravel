@@ -1,3 +1,5 @@
+**This project is currently in the testing phase and may undergo changes.**
+
 # Hawk Laravel
 
 Laravel errors Catcher for [Hawk.so](https://hawk.so).
