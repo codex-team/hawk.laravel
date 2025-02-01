@@ -1,0 +1,36 @@
+{
+    "name": "codex-team/hawk.laravel",
+    "description": "Laravel errors Catcher module for Hawk.so",
+    "keywords": ["hawk", "php", "error", "catcher", "monolog", "laravel"],
+    "type": "library",
+    "version": "0.0.1",
+    "license": "MIT",
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "codex-team/hawk.php": "^2.2.5",
+        "guzzlehttp/guzzle": "^6.0 || ^7.0",
+        "guzzlehttp/psr7": "^2.1.1",
+        "illuminate/support": "^6.0 | ^7.0 | ^8.0 | ^9.0 | ^10.0 | ^11.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.19||^3.40"
+    },
+    "autoload": {
+        "psr-4": {
+            "HawkBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "symfony": {
+            "autoload": true
+        }
+    },
+    "scripts": {
+        "csfix": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --using-cache=no --verbose"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
+    }
+}
