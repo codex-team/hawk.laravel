@@ -42,17 +42,26 @@ return Application::configure(basePath: dirname(__DIR__))
     })->create();
 ```
 
+### Register the Service Provider
+
+To complete the setup, add the `Hawk` service provider to your `config/app.php` or `bootstrap/providers.php` file in the providers array:
+
+```php
+'providers' => [
+    // Other service providers...
+    HawkBundle\ErrorLoggerServiceProvider::class,
+],
+```
+
 ### Configuration
 
 Set up Hawk using the following command:
 
 ```bash
-$ php artisan hawkbundle:publish --token=<your integration token>
+$ php artisan hawkbundle:publish
 ```
 
-This command generates the config file (`config/hawk.php`) and adds the `HAWK_TOKEN` property to it.
-
-Alternatively, you can configure `Hawk` manually by adding the following line to the `.env` file:
+This will create the configuration file (`config/hawk.php`), and you can manually add the `HAWK_TOKEN` in your `.env` file:
 
 ```env
 HAWK_TOKEN=<your integration token>

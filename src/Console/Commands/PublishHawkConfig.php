@@ -14,7 +14,7 @@ class PublishHawkConfig extends Command
 
     public function handle()
     {
-        $token = $this->option('token');
+        $token = $this->option('token') ?: '';
 
         $sourcePath = __DIR__ . '/../../../config/hawk.php';
 
