@@ -7,6 +7,7 @@ namespace HawkBundle;
 use HawkBundle\Console\Commands\PublishHawkConfig;
 use HawkBundle\Handlers\ErrorHandler;
 use HawkBundle\Services\BreadcrumbsCollector;
+use HawkBundle\Services\DataFilter;
 use HawkBundle\Services\ErrorLoggerService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
@@ -53,6 +54,7 @@ class ErrorLoggerServiceProvider extends ServiceProvider
         });
 
         Event::listen(RouteMatched::class, function (RouteMatched $event) {
+            $filter = new DataFilter();
             app(BreadcrumbsCollector::class)->add(
                 'route',
                 sprintf('%s %s → %s', $event->request->method(), $event->route->uri(), $event->route->getActionName()),
@@ -60,12 +62,11 @@ class ErrorLoggerServiceProvider extends ServiceProvider
                     'method'     => $event->request->method(),
                     'uri'        => $event->route->uri(),
                     'controller' => $event->route->getActionName(),
-                    'parameters' => $event->request->all(),
+                    'parameters' => $filter->process($event->request->all()),
                 ]
             );
         });
 
-// SQL
         Event::listen(QueryExecuted::class, function (QueryExecuted $query) {
             app(BreadcrumbsCollector::class)->add(
                 'db.query',

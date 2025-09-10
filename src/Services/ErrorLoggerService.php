@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace HawkBundle\Services;
 
-use Illuminate\Support\Facades\Log;
-
 class ErrorLoggerService
 {
     protected $config;
     protected $breadcrumbs;
 
     /** @var array<string,bool> */
-    protected array $sent = [];
+    protected $sent = [];
 
     public function __construct(array $config, BreadcrumbsCollector $breadcrumbs)
     {
@@ -32,7 +30,7 @@ class ErrorLoggerService
         $context = [
             'laravel' => [
                 'env' => app()->environment(),
-                'user' => auth()->check() ? auth()->user()->getAuthIdentifier() : null,
+                'user' => auth()->check() ? (auth()->user() ? auth()->user()->getAuthIdentifier() : null) : null,
                 'console' => app()->runningInConsole(),
             ],
             'breadcrumbs' => $this->breadcrumbs->all(),
