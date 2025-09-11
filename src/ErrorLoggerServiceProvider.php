@@ -24,10 +24,7 @@ class ErrorLoggerServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/hawk.php', 'hawk');
 
         $this->app->singleton(ErrorLoggerService::class, function ($app) {
-            return new ErrorLoggerService(
-                $app['config']['hawk'],
-                $app->make(BreadcrumbsCollector::class)
-            );
+            return new ErrorLoggerService($app['config']['hawk']);
         });
 
         $this->app->singleton(BreadcrumbsCollector::class, function () {
@@ -45,9 +42,13 @@ class ErrorLoggerServiceProvider extends ServiceProvider
             __DIR__ . '/../config/hawk.php' => config_path('hawk.php'),
         ]);
 
-        \Hawk\Catcher::init([
-            'integrationToken' => config('hawk.integration_token') ?: ''
-        ]);
+        $this->app->singleton(Catcher::class, function ($app) {
+            $breadcrumbsCollector = $app->make(BreadcrumbsCollector::class);
+
+            return Catcher::init([
+                'integrationToken' => config('hawk.integration_token') ?: ''
+            ], $breadcrumbsCollector);
+        });
 
         $this->app->singleton('Illuminate\Contracts\Debug\ExceptionHandler', function ($app) {
             return new ErrorHandler($app, $app->make(ErrorLoggerService::class));

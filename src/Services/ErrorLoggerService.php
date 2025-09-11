@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace HawkBundle\Services;
 
+use HawkBundle\Catcher;
+
 class ErrorLoggerService
 {
     protected $config;
-    protected $breadcrumbs;
 
     /** @var array<string,bool> */
     protected $sent = [];
 
-    public function __construct(array $config, BreadcrumbsCollector $breadcrumbs)
+    public function __construct(array $config)
     {
         $this->config = $config;
-        $this->breadcrumbs = $breadcrumbs;
     }
 
     public function logException(\Throwable $exception)
@@ -27,17 +27,6 @@ class ErrorLoggerService
 
         $this->sent[$objectHash] = true;
 
-        $context = [
-            'laravel' => [
-                'env' => app()->environment(),
-                'user' => auth()->check() ? (auth()->user() ? auth()->user()->getAuthIdentifier() : null) : null,
-                'console' => app()->runningInConsole(),
-            ],
-            'breadcrumbs' => $this->breadcrumbs->all(),
-        ];
-
-        \Hawk\Catcher::get()->sendException($exception, $context);
-
-        $this->breadcrumbs->reset();
+        app(Catcher::class)->sendException($exception);
     }
 }
