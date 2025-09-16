@@ -3,7 +3,7 @@
     "description": "Laravel errors Catcher module for Hawk.so",
     "keywords": ["hawk", "php", "error", "catcher", "monolog", "laravel"],
     "type": "library",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "license": "MIT",
     "require": {
         "php": "^7.2 || ^8.0",
