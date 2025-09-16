@@ -30,6 +30,10 @@ class ErrorLoggerServiceProvider extends ServiceProvider
         $this->app->singleton(BreadcrumbsCollector::class, function () {
             return new BreadcrumbsCollector();
         });
+
+        $this->app->singleton(DataFilter::class, function () {
+            return new DataFilter();
+        });
     }
 
     public function boot()
@@ -55,7 +59,7 @@ class ErrorLoggerServiceProvider extends ServiceProvider
         });
 
         Event::listen(RouteMatched::class, function (RouteMatched $event) {
-            $filter = new DataFilter();
+            $filter = resolve(DataFilter::class);
             app(BreadcrumbsCollector::class)->add(
                 'route',
                 sprintf('%s %s → %s', $event->request->method(), $event->route->uri(), $event->route->getActionName()),

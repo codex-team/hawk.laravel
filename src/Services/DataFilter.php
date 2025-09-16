@@ -20,34 +20,54 @@ class DataFilter
      * @var array<string>
      */
     private $possiblySensitiveDataKeys = [
-        'pan',
-        'secret',
-        'credentials',
-        'card[number]',
-        'password',
+        // Authorization and sessions
         'auth',
+        'authorization',
         'access_token',
         'accesstoken',
-        'authorization',
-        'api_key',
-        'apikey',
         'token',
         'jwt',
         'session',
         'sessionid',
         'session_id',
-        'client_secret',
-        'private_key',
-        'ssh_key',
-        'key',
-        'creditcard',
-        'credit_card',
-        'pin',
-        'ssn',
-        'security_code',
+
+        // API keys and secure tokens
+        'api_key',
+        'apikey',
         'x-api-key',
         'x-auth-token',
         'bearer',
+        'client_secret',
+        'secret',
+        'credentials',
+
+        // Passwords
+        'password',
+        'passwd',
+        'mysql_pwd',
+
+        // Encryption keys
+        'private_key',
+        'ssh_key',
+
+        // Payments data
+        'card',
+        'cardnumber',
+        'card[number]',
+        'creditcard',
+        'credit_card',
+        'pan',
+        'pin',
+        'security_code',
+        'stripetoken',
+        'cloudpayments_public_id',
+        'cloudpayments_secret',
+
+        // Connections
+        'dsn',
+
+        // Personal Data
+        'ssn',
     ];
 
     /**
