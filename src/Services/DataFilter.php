@@ -55,7 +55,28 @@ class DataFilter
      *
      * @var string
      */
-    private $bankCardRegex = '/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/';
+    // Regex patterns for different card types:
+    // Visa: 13 or 16 digits, starting with 4
+    private $visaRegex = '4[0-9]{12}(?:[0-9]{3})?';
+    // MasterCard: 16 digits, starting with 51-55 or 2221-2720
+    private $masterCardRegex = '(?:5[1-5][0-9]{14}|2[2-7][0-9]{14})';
+    // American Express: 15 digits, starting with 34 or 37
+    private $amexRegex = '3[47][0-9]{13}';
+    // Discover: 16 digits, starting with 6011 or 65
+    private $discoverRegex = '6(?:011|5[0-9][0-9])[0-9]{12}';
+    // Diners Club: 14 digits, starting with 300-305, 36, or 38
+    private $dinersRegex = '3(?:0[0-5]|[68][0-9])[0-9]{11}';
+    // JCB: 15 or 16 digits, starting with 2131, 1800, or 35
+    private $jcbRegex = '(?:2131|1800|35\d{3})\d{11}';
+    // Combined regex for all supported card types
+    private $bankCardRegex = '/^('
+        . $this->visaRegex . '|'
+        . $this->masterCardRegex . '|'
+        . $this->discoverRegex . '|'
+        . $this->amexRegex . '|'
+        . $this->dinersRegex . '|'
+        . $this->jcbRegex
+        . ')$/';
 
     /**
      * Recursively filter sensitive data in array
