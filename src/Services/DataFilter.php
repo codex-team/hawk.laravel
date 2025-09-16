@@ -88,15 +88,6 @@ class DataFilter
     private $dinersRegex = '3(?:0[0-5]|[68][0-9])[0-9]{11}';
     // JCB: 15 or 16 digits, starting with 2131, 1800, or 35
     private $jcbRegex = '(?:2131|1800|35\d{3})\d{11}';
-    // Combined regex for all supported card types
-    private $bankCardRegex = '/^('
-        . $this->visaRegex . '|'
-        . $this->masterCardRegex . '|'
-        . $this->discoverRegex . '|'
-        . $this->amexRegex . '|'
-        . $this->dinersRegex . '|'
-        . $this->jcbRegex
-        . ')$/';
 
     /**
      * Recursively filter sensitive data in array
@@ -140,7 +131,7 @@ class DataFilter
 
         $clean = preg_replace('/\D/', '', $value);
 
-        if ($clean && preg_match($this->bankCardRegex, $clean)) {
+        if ($clean && preg_match($this->getBankCardRegex(), $clean)) {
             return $this->filteredValuePlaceholder;
         }
 
@@ -183,5 +174,21 @@ class DataFilter
             }
         }
         return $arr;
+    }
+
+    /**
+     * @return string
+     */
+    private function getBankCardRegex(): string
+    {
+        // Combined regex for all supported card types
+        return '/^('
+            . $this->visaRegex . '|'
+            . $this->masterCardRegex . '|'
+            . $this->discoverRegex . '|'
+            . $this->amexRegex . '|'
+            . $this->dinersRegex . '|'
+            . $this->jcbRegex
+            . ')$/';
     }
 }
