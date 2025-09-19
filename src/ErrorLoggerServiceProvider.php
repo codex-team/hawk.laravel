@@ -73,9 +73,9 @@ class ErrorLoggerServiceProvider extends ServiceProvider
                 }
 
                 $options['before_send'] = $app->make($beforeSendService);
-
-                return Catcher::init($options, $breadcrumbsCollector);
             }
+
+            return Catcher::init($options, $breadcrumbsCollector);
         });
 
         $this->app->singleton('Illuminate\Contracts\Debug\ExceptionHandler', function ($app) {
