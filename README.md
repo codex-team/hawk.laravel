@@ -6,11 +6,9 @@
 
 Laravel error catcher for [Hawk.so](https://hawk.so).
 
-> **Note:** This project is currently in the testing phase and may change in the future.
+## Setup
 
 ---
-
-## Setup
 
 1. [Register](https://garage.hawk.so/sign-up) an account, create a project, and get an **Integration Token**.
 2. Install the SDK via [Composer](https://getcomposer.org):
@@ -24,9 +22,22 @@ Laravel error catcher for [Hawk.so](https://hawk.so).
 - PHP **7.2+**
 - Laravel **11.x+**
 
+## Features
+
 ---
 
+- 🦅 Automatic error catching
+- 💎 Manual exception and message sending
+- 🙂 Attaching user information
+- 📦 Attaching additional context
+- 🛡️ Sensitive data filtering
+- 🌟 BeforeSend hook for event preprocessing
+- 🗂️ Breadcrumbs collection (routes, queries, jobs, logs)
+- ⚡ Laravel 11+ support
+
 ## Configuration
+
+---
 
 ### Enable exception capturing
 
@@ -80,9 +91,9 @@ Then add your token in `.env`:
 HAWK_TOKEN=<your_integration_token>
 ```
 
----
-
 ## Usage
+
+---
 
 ### Adding User & Context Information
 
@@ -137,9 +148,9 @@ app(\HawkBundle\Catcher::class)->sendMessage(
 );
 ```
 
----
-
 ## BeforeSend Hook
+
+---
 
 If you want to modify or filter errors before they are sent to Hawk,  
 implement the `BeforeSendServiceInterface`.
@@ -185,23 +196,23 @@ return [
 ];
 ```
 
----
-
 ## Issues & Contributions
+
+---
 
 - Found a bug? [Open an issue](https://github.com/codex-team/hawk.laravel/issues)
 - Want to improve the package? Pull requests are welcome!
 
----
-
 ## Useful Links
+
+---
 
 - **Repository:** [github.com/codex-team/hawk.laravel](https://github.com/codex-team/hawk.laravel)
 - **Composer Package:** [packagist.org/packages/codex-team/hawk.laravel](https://packagist.org/packages/codex-team/hawk.laravel)
 - **CodeX Team:** [codex.so](https://codex.so)
 
----
-
 ## License
+
+---
 
 [MIT](LICENSE)
