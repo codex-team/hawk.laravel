@@ -6,6 +6,7 @@ namespace HawkBundle;
 
 use HawkBundle\Console\Commands\PublishHawkConfig;
 use HawkBundle\Handlers\ErrorHandler;
+use HawkBundle\Services\BeforeSendServiceInterface;
 use HawkBundle\Services\BreadcrumbsCollector;
 use HawkBundle\Services\DataFilter;
 use HawkBundle\Services\ErrorLoggerService;
@@ -16,6 +17,7 @@ use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Log\Events\MessageLogged;
+use InvalidArgumentException;
 
 class ErrorLoggerServiceProvider extends ServiceProvider
 {
@@ -49,9 +51,31 @@ class ErrorLoggerServiceProvider extends ServiceProvider
         $this->app->singleton(Catcher::class, function ($app) {
             $breadcrumbsCollector = $app->make(BreadcrumbsCollector::class);
 
-            return Catcher::init([
-                'integrationToken' => config('hawk.integration_token') ?: ''
-            ], $breadcrumbsCollector);
+            $options = [
+                'integrationToken' => config('hawk.integration_token') ?: '',
+            ];
+
+            $beforeSendService = config('hawk.before_send_service');
+            if (!empty($beforeSendService)) {
+                if (!class_exists($beforeSendService)) {
+                    throw new InvalidArgumentException(sprintf(
+                        'The before_send_service class "%s" does not exist.',
+                        $beforeSendService
+                    ));
+                }
+
+                if (!is_subclass_of($beforeSendService, BeforeSendServiceInterface::class)) {
+                    throw new InvalidArgumentException(sprintf(
+                        'The service "%s" must implement "%s".',
+                        $beforeSendService,
+                        BeforeSendServiceInterface::class
+                    ));
+                }
+
+                $options['before_send'] = $app->make($beforeSendService);
+            }
+
+            return Catcher::init($options, $breadcrumbsCollector);
         });
 
         $this->app->singleton('Illuminate\Contracts\Debug\ExceptionHandler', function ($app) {
