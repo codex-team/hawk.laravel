@@ -1,7 +1,6 @@
 # Hawk Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codex-team/hawk.laravel.svg?style=flat-square)](https://packagist.org/packages/codex-team/hawk.laravel)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![PHP Version](https://img.shields.io/packagist/php-v/codex-team/hawk.laravel?style=flat-square)](https://www.php.net/)
 
 Laravel error catcher for [Hawk.so](https://hawk.so).
@@ -213,6 +212,5 @@ return [
 
 ## License
 
----
-
-[MIT](LICENSE)
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+See the [LICENSE](./LICENSE) file for the full text.

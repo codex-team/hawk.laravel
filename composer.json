@@ -4,7 +4,7 @@
     "keywords": ["hawk", "php", "error", "catcher", "monolog", "laravel"],
     "type": "library",
     "version": "0.1.2",
-    "license": "MIT",
+    "license": "AGPL-3.0-only",
     "require": {
         "php": "^7.2 || ^8.0",
         "codex-team/hawk.php": "^2.2.9",
