@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace HawkBundle;
 
 use HawkBundle\Console\Commands\PublishHawkConfig;
-use HawkBundle\Handlers\ErrorHandler;
 use HawkBundle\Services\BeforeSendServiceInterface;
 use HawkBundle\Services\BreadcrumbsCollector;
 use HawkBundle\Services\DataFilter;
@@ -76,10 +75,6 @@ class ErrorLoggerServiceProvider extends ServiceProvider
             }
 
             return Catcher::init($options, $breadcrumbsCollector);
-        });
-
-        $this->app->singleton('Illuminate\Contracts\Debug\ExceptionHandler', function ($app) {
-            return new ErrorHandler($app, $app->make(ErrorLoggerService::class));
         });
 
         Event::listen(RouteMatched::class, function (RouteMatched $event) {
