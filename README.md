@@ -18,11 +18,12 @@ Laravel error catcher for [Hawk.so](https://hawk.so).
 
 ### Requirements
 
-- PHP **7.2+**
+- PHP **8.2+** for Laravel 11 and 12
+- PHP **8.3+** for Laravel 13
 - Laravel **11.x, 12.x, 13.x** for the documented setup below
 
-Laravel 13 requires PHP **8.3+** in the host application. Composer constraints for legacy
-Illuminate **6.x-10.x** are preserved for existing installations.
+Composer constraints for legacy Illuminate **6.x-10.x** are preserved for existing
+installations with their own framework PHP requirements.
 
 ## Features
 
@@ -69,7 +70,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
 ### Register the Service Provider
 
-For Laravel 11+ and Laravel 13, add the `Hawk` service provider to `bootstrap/providers.php`:
+For Laravel 11-13, add the `Hawk` service provider to `bootstrap/providers.php`:
 
 ```php
 <?php
