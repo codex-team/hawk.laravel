@@ -18,8 +18,12 @@ Laravel error catcher for [Hawk.so](https://hawk.so).
 
 ### Requirements
 
-- PHP **7.2+**
-- Laravel **11.x+**
+- PHP **8.2+** for Laravel 11 and 12
+- PHP **8.3+** for Laravel 13
+- Laravel **11.x, 12.x, 13.x** for the documented setup below
+
+Composer constraints for legacy Illuminate **6.x-10.x** are preserved for existing
+installations with their own framework PHP requirements.
 
 ## Features
 
@@ -32,7 +36,7 @@ Laravel error catcher for [Hawk.so](https://hawk.so).
 - 🛡️ Sensitive data filtering
 - 🌟 BeforeSend hook for event preprocessing
 - 🗂️ Breadcrumbs collection (routes, queries, jobs, logs)
-- ⚡ Laravel 11+ support
+- ⚡ Laravel 11, 12, and 13 support
 
 ## Configuration
 
@@ -66,7 +70,18 @@ return Application::configure(basePath: dirname(__DIR__))
 
 ### Register the Service Provider
 
-Add the `Hawk` service provider to your `config/app.php` or `bootstrap/providers.php`:
+For Laravel 11-13, add the `Hawk` service provider to `bootstrap/providers.php`:
+
+```php
+<?php
+
+return [
+    App\Providers\AppServiceProvider::class,
+    HawkBundle\ErrorLoggerServiceProvider::class,
+];
+```
+
+For older Laravel applications using `config/app.php`, add the provider to the `providers` list:
 
 ```php
 'providers' => [
