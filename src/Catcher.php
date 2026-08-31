@@ -121,7 +121,10 @@ final class Catcher
      */
     public function sendException(Throwable $throwable, array $context = [])
     {
-        $this->handler->handleException($throwable, $context);
+        $this->handler->sendEvent([
+            'exception' => $throwable,
+            'context'   => $context,
+        ]);
     }
 
     /**
